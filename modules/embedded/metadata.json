@@ -1,0 +1,16 @@
+{
+    "homepage": "https://github.com/mthiffau",
+    "maintainers": [
+	{
+	    "email": "matt.thiffault@gmail.com",
+	    "name": "Matt Thiffault"
+	}
+    ],
+    "repository": [
+        "github:mthiffau/embedded"
+    ],
+    "versions": [
+        "1.0"
+    ],
+    "yanked_versions": {}
+}
