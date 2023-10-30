@@ -1,0 +1,7 @@
+--- MODULE.bazel
++++ MODULE.bazel
+@@ -0,0 +1,4 @@
++module(
++    name = "avr_toolchain_darwin_x86_64",
++    version = "3.7.0",
++)

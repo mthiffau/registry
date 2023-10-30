@@ -1,0 +1,8 @@
+module(
+    name = "arduino_core_avr",
+    version = "1.8.6",
+)
+
+bazel_dep(name = "avr_toolchain_linux_x86_64", version = "3.7.0")
+bazel_dep(name = "avr_toolchain_darwin_x86_64", version = "3.7.0")
+bazel_dep(name = "bazel_avr_rules", version = "1.0")

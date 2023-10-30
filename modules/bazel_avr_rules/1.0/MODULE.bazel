@@ -1,0 +1,9 @@
+module(
+    name = "bazel_avr_rules",
+    version = "1.0",
+)
+
+non_module_dependencies = use_extension("//bazel:extensions.bzl", "non_module_dependencies")
+use_repo(non_module_dependencies,
+         "avr_toolchain_linux_x86_64",
+         "avr_toolchain_darwin_x86_64")

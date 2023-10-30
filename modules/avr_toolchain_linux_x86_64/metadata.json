@@ -1,0 +1,13 @@
+{
+    "homepage": "https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers",
+    "maintainers": [
+	{
+	    "email": "matt.thiffault@gmail.com",
+	    "name": "Matt Thiffault"
+	}
+    ],
+    "versions": [
+        "3.7.0"
+    ],
+    "yanked_versions": {}
+}

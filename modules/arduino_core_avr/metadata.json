@@ -1,0 +1,13 @@
+{
+    "homepage": "https://github.com/arduino/ArduinoCore-avr",
+    "maintainers": [
+	{
+	    "email": "matt.thiffault@gmail.com",
+	    "name": "Matt Thiffault"
+	}
+    ],
+    "versions": [
+        "1.8.6"
+    ],
+    "yanked_versions": {}
+}

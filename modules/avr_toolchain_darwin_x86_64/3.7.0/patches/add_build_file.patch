@@ -1,0 +1,153 @@
+--- /dev/null
++++ BUILD.bazel
+@@ -0,0 +1,150 @@
++load("//:toolchain.bzl", "cc_toolchain_config")
++
++package(default_visibility = ["//visibility:public"])
++
++# Compiler binaries
++filegroup(
++    name = "cpp",
++    srcs = [
++        "bin/avr-g++",
++    ],
++)
++
++filegroup(
++    name = "gcc",
++    srcs = [
++        "bin/avr-gcc",
++    ],
++)
++
++filegroup(
++    name = "gcov",
++    srcs = [
++        "bin/avr-gcov",
++    ],
++)
++
++# Binutils binaries.
++filegroup(
++    name = "ar",
++    srcs = [
++        "bin/avr-gcc-ar",
++    ],
++)
++
++filegroup(
++    name = "as",
++    srcs = [
++        "bin/avr-as",
++    ],
++)
++
++filegroup(
++    name = "ld",
++    srcs = [
++        "bin/avr-ld",
++    ],
++)
++
++filegroup(
++    name = "nm",
++    srcs = [
++        "bin/avr-nm",
++    ],
++)
++
++filegroup(
++    name = "objcopy",
++    srcs = [
++        "bin/avr-objcopy",
++    ],
++)
++
++filegroup(
++    name = "objdump",
++    srcs = [
++        "bin/avr-objdump",
++    ],
++)
++
++filegroup(
++    name = "size",
++    srcs = [
++        "bin/avr-size",
++    ],
++)
++
++filegroup(
++    name = "strip",
++    srcs = [
++        "bin/avr-strip",
++    ],
++)
++
++# All files
++filegroup(
++    name = "all_files",
++    srcs = glob([
++        "**",
++    ]),
++)
++
++# Instantiate AVR toolchain config.
++cc_toolchain_config(name = "avr_toolchain_config")
++
++cc_toolchain_suite(
++    name = "avr_suite",
++    toolchains = {
++        "avr": "avr_toolchain",
++    },
++)
++
++filegroup(name = "empty")
++
++filegroup(
++    name = "avr_toolchain_compiler_files",
++    srcs = [
++        ":cpp",
++        ":gcc",
++        ":ld",
++        ":as",
++    ],
++)
++
++filegroup(
++    name = "avr_toolchain_linker_files",
++    srcs = [
++        ":gcc",
++        ":ld",
++        ":ar",
++    ],
++)
++
++# AVR C++ toolchain.
++cc_toolchain(
++    name = "avr_toolchain",
++    all_files = ":all_files",
++    ar_files = ":ar",
++    as_files = ":as",
++    compiler_files = ":avr_toolchain_compiler_files",
++    dwp_files = ":empty",
++    linker_files = ":avr_toolchain_linker_files",
++    objcopy_files = ":objcopy",
++    strip_files = ":strip",
++    supports_param_files = 0,
++    toolchain_config = ":avr_toolchain_config",
++    toolchain_identifier = "avr-toolchain",
++)
++
++# Compiler and system header targets.
++cc_library(
++    name = "system_headers",
++    hdrs = glob(["avr/include/**/*.h"]),
++    strip_include_prefix = "avr/include",
++)
++
++cc_library(
++    name = "compiler_headers",
++    hdrs = glob(["lib/gcc/avr/7.3.0/include/**/*.h"]),
++    strip_include_prefix = "lib/gcc/avr/7.3.0/include",
++)
