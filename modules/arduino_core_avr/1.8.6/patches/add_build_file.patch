@@ -1,9 +1,9 @@
 --- /dev/null
-+++ BUILD
-@@ -0,0 +1,171 @@
-+load("@bazel_avr_rules//build_rules/avr/arduino:mega2560.bzl", "mega2560_cc_library")
-+load("@bazel_avr_rules//build_rules/avr/arduino:nano.bzl", "nano_cc_library")
-+load("@bazel_avr_rules//build_rules/avr/arduino:uno.bzl", "uno_cc_library")
++++ BUILD.bazel
+@@ -0,0 +1,178 @@
++load("@bazel_avr_rules//build_rules/avr/boards:arduino.bzl", "mega2560_cc_library")
++#load("@bazel_avr_rules//build_rules/avr/boards:arduino.bzl", "nano_cc_library")
++#load("@bazel_avr_rules//build_rules/avr/boards:arduino.bzl", "uno_cc_library")
 +
 +ARDUINO_CORE_INCLUDES = ["cores/arduino"]
 +ARDUINO_CORE_STRIP_INCLUDE_PREFIX = "cores/arduino"
@@ -56,6 +56,12 @@
 +)
 +
 +# Arduino Core library target for the Arduino Mega 2560.
++MEGA2560_CORE_DEFINES = [
++    "ARDUINO=10819",
++    "ARDUINO_AVR_MEGA2560",
++    "ARDUINO_ARCH_AVR",
++]
++
 +mega2560_cc_library(
 +    name = "arduino_variant_mega2560",
 +    hdrs = ["variants/mega/pins_arduino.h"],
@@ -66,6 +72,7 @@
 +    name = "arduino_core_mega2560",
 +    includes = ARDUINO_CORE_INCLUDES,
 +    strip_include_prefix = ARDUINO_CORE_STRIP_INCLUDE_PREFIX,
++    defines = MEGA2560_CORE_DEFINES,
 +    hdrs = ARDUINO_CORE_HDRS,
 +    srcs = ARDUINO_CORE_SRCS,
 +    deps = [
@@ -75,47 +82,47 @@
 +)
 +
 +# Arduino Core library target for the Arduino Nano.
-+nano_cc_library(
-+    name = "arduino_variant_nano",
-+    hdrs = ["variants/eightanaloginputs/pins_arduino.h"],
-+    strip_include_prefix = "variants/eightanaloginputs",
-+    deps = [
-+        # This variant header includes the standard header, see the
-+        # "standard" build target definition in this file for more details.
-+        ":standard",
-+    ],
-+)
++# nano_cc_library(
++#     name = "arduino_variant_nano",
++#     hdrs = ["variants/eightanaloginputs/pins_arduino.h"],
++#     strip_include_prefix = "variants/eightanaloginputs",
++#     deps = [
++#         # This variant header includes the standard header, see the
++#         # "standard" build target definition in this file for more details.
++#         ":standard",
++#     ],
++# )
 +
-+nano_cc_library(
-+    name = "arduino_core_nano",
-+    includes = ARDUINO_CORE_INCLUDES,
-+    strip_include_prefix = ARDUINO_CORE_STRIP_INCLUDE_PREFIX,
-+    hdrs = ARDUINO_CORE_HDRS,
-+    srcs = ARDUINO_CORE_SRCS,
-+    deps = [
-+        ":arduino_variant_nano",
-+    ],
-+    visibility = ["//visibility:public"],
-+)
++# nano_cc_library(
++#     name = "arduino_core_nano",
++#     includes = ARDUINO_CORE_INCLUDES,
++#     strip_include_prefix = ARDUINO_CORE_STRIP_INCLUDE_PREFIX,
++#     hdrs = ARDUINO_CORE_HDRS,
++#     srcs = ARDUINO_CORE_SRCS,
++#     deps = [
++#         ":arduino_variant_nano",
++#     ],
++#     visibility = ["//visibility:public"],
++# )
 +
 +# Arduino Core library target for the Arduino Uno.
-+uno_cc_library(
-+    name = "arduino_variant_uno",
-+    hdrs = ["variants/standard/pins_arduino.h"],
-+    strip_include_prefix = "variants/standard",
-+)
++# uno_cc_library(
++#     name = "arduino_variant_uno",
++#     hdrs = ["variants/standard/pins_arduino.h"],
++#     strip_include_prefix = "variants/standard",
++# )
 +
-+uno_cc_library(
-+    name = "arduino_core_uno",
-+    includes = ARDUINO_CORE_INCLUDES,
-+    strip_include_prefix = ARDUINO_CORE_STRIP_INCLUDE_PREFIX,
-+    hdrs = ARDUINO_CORE_HDRS,
-+    srcs = ARDUINO_CORE_SRCS,
-+    deps = [
-+        ":arduino_variant_uno",
-+    ],
-+    visibility = ["//visibility:public"],
-+)
++# uno_cc_library(
++#     name = "arduino_core_uno",
++#     includes = ARDUINO_CORE_INCLUDES,
++#     strip_include_prefix = ARDUINO_CORE_STRIP_INCLUDE_PREFIX,
++#     hdrs = ARDUINO_CORE_HDRS,
++#     srcs = ARDUINO_CORE_SRCS,
++#     deps = [
++#         ":arduino_variant_uno",
++#     ],
++#     visibility = ["//visibility:public"],
++# )
 +
 +# Set of things common to all Wire library targets.
 +ARDUINO_WIRE_INCLUDES = ["libraries/Wire/src"]
@@ -146,29 +153,29 @@
 +)
 +
 +# Arduino Wire library target for the Arduino Nano.
-+nano_cc_library(
-+    name = "arduino_wire_nano",
-+    includes = ARDUINO_WIRE_INCLUDES,
-+    strip_include_prefix = ARDUINO_WIRE_STRIP_INCLUDE_PREFIX,
-+    hdrs = ARDUINO_WIRE_HDRS,
-+    srcs = ARDUINO_WIRE_SRCS,
-+    deps = [
-+        ":arduino_core_nano",
-+        ":arduino_variant_nano",
-+    ],
-+    visibility = ["//visibility:public"],
-+)
++# nano_cc_library(
++#     name = "arduino_wire_nano",
++#     includes = ARDUINO_WIRE_INCLUDES,
++#     strip_include_prefix = ARDUINO_WIRE_STRIP_INCLUDE_PREFIX,
++#     hdrs = ARDUINO_WIRE_HDRS,
++#     srcs = ARDUINO_WIRE_SRCS,
++#     deps = [
++#         ":arduino_core_nano",
++#         ":arduino_variant_nano",
++#     ],
++#     visibility = ["//visibility:public"],
++# )
 +
 +# Arduino Wire library target for the Arduino Uno.
-+uno_cc_library(
-+    name = "arduino_wire_uno",
-+    includes = ARDUINO_WIRE_INCLUDES,
-+    strip_include_prefix = ARDUINO_WIRE_STRIP_INCLUDE_PREFIX,
-+    hdrs = ARDUINO_WIRE_HDRS,
-+    srcs = ARDUINO_WIRE_SRCS,
-+    deps = [
-+        ":arduino_core_uno",
-+        ":arduino_variant_uno",
-+    ],
-+    visibility = ["//visibility:public"],
-+)
++# uno_cc_library(
++#     name = "arduino_wire_uno",
++#     includes = ARDUINO_WIRE_INCLUDES,
++#     strip_include_prefix = ARDUINO_WIRE_STRIP_INCLUDE_PREFIX,
++#     hdrs = ARDUINO_WIRE_HDRS,
++#     srcs = ARDUINO_WIRE_SRCS,
++#     deps = [
++#         ":arduino_core_uno",
++#         ":arduino_variant_uno",
++#     ],
++#     visibility = ["//visibility:public"],
++# )

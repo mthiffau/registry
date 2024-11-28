@@ -1,7 +1,7 @@
 --- /dev/null
 +++ BUILD.bazel
-@@ -0,0 +1,150 @@
-+load("//:toolchain.bzl", "cc_toolchain_config")
+@@ -0,0 +1,158 @@
++load("//:toolchain.bzl", "atmega2560_cc_toolchain_config")
 +
 +package(default_visibility = ["//visibility:public"])
 +
@@ -92,16 +92,6 @@
 +    ]),
 +)
 +
-+# Instantiate AVR toolchain config.
-+cc_toolchain_config(name = "avr_toolchain_config")
-+
-+cc_toolchain_suite(
-+    name = "avr_suite",
-+    toolchains = {
-+        "avr": "avr_toolchain",
-+    },
-+)
-+
 +filegroup(name = "empty")
 +
 +filegroup(
@@ -123,20 +113,38 @@
 +    ],
 +)
 +
-+# AVR C++ toolchain.
++# AVR C++ toolchains with configs for supported CPUs
++
++# ATMega 2560
++atmega2560_cc_toolchain_config(name = "atmega2560_toolchain_config")
++
 +cc_toolchain(
-+    name = "avr_toolchain",
++    name = "atmega2560_toolchain",
++    toolchain_identifier = "atmega2560_toolchain",
++    toolchain_config = ":atmega2560_toolchain_config",
 +    all_files = ":all_files",
-+    ar_files = ":ar",
-+    as_files = ":as",
 +    compiler_files = ":avr_toolchain_compiler_files",
 +    dwp_files = ":empty",
 +    linker_files = ":avr_toolchain_linker_files",
 +    objcopy_files = ":objcopy",
 +    strip_files = ":strip",
++    ar_files = ":ar",
++    as_files = ":as",
 +    supports_param_files = 0,
-+    toolchain_config = ":avr_toolchain_config",
-+    toolchain_identifier = "avr-toolchain",
++)
++
++toolchain(
++    name = "cc_toolchain_for_atmega2560_linux_x86_64",
++    toolchain = ":atmega2560_toolchain",
++    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
++    exec_compatible_with = [
++        "@platforms//cpu:x86_64",
++        "@platforms//os:linux",
++    ],
++    target_compatible_with = [
++        "@avr_platforms//cpu:atmega2560",
++        "@platforms//os:none",
++    ],
 +)
 +
 +# Compiler and system header targets.

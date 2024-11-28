@@ -4,8 +4,8 @@
     "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/avr8-gnu-toolchain-3.7.0.1796-linux.any.x86_64.tar.gz",
     "patch_strip": 0,
     "patches": {
-	"add_build_file.patch": "sha256-nJShcTtrYMOGyNXY82qWkCLtyxjqR4lfC6GGDJ6sLxA=",
-	"add_toolchain_bzl.patch": "sha256-GN18KUcjpLSbqolP7xoxzyKNsmJxzC10rHWg70R4/6Q=",
-        "module_dot_bazel.patch": "sha256-gkeBb8zyIw0BZk+CYbep4VVPVKd3BfPm47Qe0ugG+0k="
+       "add_build_file.patch": "sha256-0ABVVYzfo8KizVEjPVwqQHxAFbq/yNfykGnymtBYfi0=",
+       "add_module_dot_bazel.patch": "sha256-TFxeE/Mtakk+01iZWgRI54ZJYp6bC6b97if18lBQNvk=",
+       "add_toolchain_bzl.patch": "sha256-TMkkimiWlVXklF8Bw+Ae6W6Ee/D2BbMxgsSsfg3hfrQ="
     }
 }

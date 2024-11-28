@@ -1,0 +1,5 @@
+module(
+    name = "avr_platforms",
+    version = "1.0",
+)
+bazel_dep(name = "platforms", version = "0.0.10")

@@ -1,13 +1,16 @@
 {
-    "homepage": "https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers",
+    "homepage": "https://github.com/mthiffau/bazel_avr_rules",
     "maintainers": [
 	{
 	    "email": "matt.thiffault@gmail.com",
 	    "name": "Matt Thiffault"
 	}
     ],
+    "repository": [
+        "github:mthiffau/bazel_avr_rules"
+    ],
     "versions": [
-        "3.7.0"
+        "1.0"
     ],
     "yanked_versions": {}
 }

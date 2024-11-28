@@ -1,0 +1,270 @@
+--- /dev/null
++++ toolchain.bzl
+@@ -0,0 +1,267 @@
++load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
++load(
++    "@bazel_tools//tools/cpp:cc_toolchain_config_lib.bzl",
++    "feature",
++    "flag_group",
++    "flag_set",
++    "tool_path",
++)
++
++AVR_SYSTEM_INCLUDES = [
++    "lib/gcc/avr/7.3.0/include",
++    "avr/include",
++]
++
++link_actions = [
++    ACTION_NAMES.cpp_link_executable,
++    ACTION_NAMES.cpp_link_dynamic_library,
++    ACTION_NAMES.cpp_link_nodeps_dynamic_library,
++]
++
++tool_paths = [
++    tool_path(
++        name = "ar",
++        path = "bin/avr-gcc-ar",
++    ),
++    tool_path(
++        name = "as",
++        path = "bin/avr-as",
++    ),
++    tool_path(
++        name = "cpp",
++        path = "bin/avr-g++",
++    ),
++    tool_path(
++        name = "gcc",
++        path = "bin/avr-gcc",
++    ),
++    tool_path(
++        name = "gcov",
++        path = "bin/avr-gcov",
++    ),
++    tool_path(
++        name = "ld",
++        path = "bin/avr-ld",
++    ),
++    tool_path(
++        name = "nm",
++        path = "bin/avr-nm",
++    ),
++    tool_path(
++        name = "objcopy",
++        path = "bin/avr-objcopy",
++    ),
++    tool_path(
++        name = "objdump",
++        path = "bin/avr-objdump",
++    ),
++    tool_path(
++        name = "strip",
++        path = "bin/avr-strip",
++    ),
++]
++
++def _isystemify(paths):
++    pairs = zip(["-isystem" for p in paths], paths)
++    return [item for sublist in pairs for item in sublist]
++
++AVR_COMMON_FEATURES = [
++    feature(
++        name = "default_c_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.c_compile],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-g",
++                            "-Os",
++                            "-w",
++                            "-std=gnu11",
++                            "-ffunction-sections",
++                            "-fdata-sections",
++                            #"-MDD",
++                            "-flto",
++                            "-fno-fat-lto-objects",
++                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "default_cc_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.cpp_compile],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-g",
++                            "-Os",
++                            "-w",
++                            "-std=gnu11",
++                            "-fpermissive",
++                            "-fno-exceptions",
++                            "-ffunction-sections",
++                            "-fdata-sections",
++                            "-fno-threadsafe-statics",
++                            "-Wno-error=narrowing",
++                            #"-MDD",
++                            "-flto",
++                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "default_as_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.assemble],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-c",
++                            "-g",
++                            "-x assembler-with-cpp",
++                            "-flto",
++                            #"-MDD",
++                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "default_linker_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = link_actions,
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-w",
++                            "-Os",
++                            "-g",
++                            "-flto",
++                            "-fuse-linker-plugin",
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++]
++
++ATMEGA2560_FEATURES = [
++    feature(
++        name = "atmega2560_c_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.c_compile],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-mmcu=atmega2560"
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "atmega2560_cc_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.cpp_compile],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-mmcu=atmega2560",
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "atmega2560_aspp_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.preprocess_assemble],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-mmcu=atmega2560",
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "atmega2560_as_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = [ACTION_NAMES.assemble],
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-mmcu=atmega2560",
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++    feature(
++        name = "atmega2560_dynamic_linker_flags",
++        enabled = True,
++        flag_sets = [
++            flag_set(
++                actions = link_actions,
++                flag_groups = ([
++                    flag_group(
++                        flags = [
++                            "-mmcu=atmega2560",
++                        ],
++                    ),
++                ])
++            ),
++        ],
++    ),
++]
++
++def _avr_impl(ctx):
++    return cc_common.create_cc_toolchain_config_info(
++        ctx = ctx,
++        features = AVR_COMMON_FEATURES + ATMEGA2560_FEATURES,
++        # Ideally this should be used, but some combination of avr-gcc and bazel
++        # mean it doesn't work...
++        cxx_builtin_include_directories = [],
++        toolchain_identifier = "baremetal_avr_toolchain",
++        host_system_name = "local",
++        target_system_name = "local",
++        target_cpu = "avr",
++        target_libc = "unknown",
++        compiler = "avr-g++",
++        abi_version = "unknown",
++        abi_libc_version = "unknown",
++        tool_paths = tool_paths,
++    )
++
++atmega2560_cc_toolchain_config = rule(
++    implementation = _avr_impl,
++    attrs = {},
++    provides = [CcToolchainConfigInfo],
++)
