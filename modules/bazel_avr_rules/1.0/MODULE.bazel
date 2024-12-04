@@ -4,4 +4,4 @@ module(
 )
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "avr_platforms", version = "1.0")
-bazel_dep(name = "baremetal_avr_toolchain_linux_x86_64", version = "3.7.0")
+bazel_dep(name = "baremetal_avr_toolchain_linux_x86_64", version = "13.2.0")

@@ -1,0 +1,195 @@
+--- /dev/null
++++ BUILD.bazel
+@@ -0,0 +1,192 @@
++load("//:toolchain.bzl",
++     "atmega2560_cc_toolchain_config",
++     "atmega328p_cc_toolchain_config")
++
++package(default_visibility = ["//visibility:public"])
++
++# Compiler binaries
++filegroup(
++    name = "cpp",
++    srcs = [
++        "bin/avr-g++",
++    ],
++)
++
++filegroup(
++    name = "gcc",
++    srcs = [
++        "bin/avr-gcc",
++    ],
++)
++
++filegroup(
++    name = "gcov",
++    srcs = [
++        "bin/avr-gcov",
++    ],
++)
++
++# Binutils binaries.
++filegroup(
++    name = "ar",
++    srcs = [
++        "bin/avr-gcc-ar",
++    ],
++)
++
++filegroup(
++    name = "as",
++    srcs = [
++        "bin/avr-as",
++    ],
++)
++
++filegroup(
++    name = "ld",
++    srcs = [
++        "bin/avr-ld",
++    ],
++)
++
++filegroup(
++    name = "nm",
++    srcs = [
++        "bin/avr-nm",
++    ],
++)
++
++filegroup(
++    name = "objcopy",
++    srcs = [
++        "bin/avr-objcopy",
++    ],
++)
++
++filegroup(
++    name = "objdump",
++    srcs = [
++        "bin/avr-objdump",
++    ],
++)
++
++filegroup(
++    name = "size",
++    srcs = [
++        "bin/avr-size",
++    ],
++)
++
++filegroup(
++    name = "strip",
++    srcs = [
++        "bin/avr-strip",
++    ],
++)
++
++# All files
++filegroup(
++    name = "all_files",
++    srcs = glob([
++        "**",
++    ]),
++)
++
++filegroup(name = "empty")
++
++filegroup(
++    name = "avr_toolchain_compiler_files",
++    srcs = [
++        ":cpp",
++        ":gcc",
++        ":ld",
++        ":as",
++    ],
++)
++
++filegroup(
++    name = "avr_toolchain_linker_files",
++    srcs = [
++        ":gcc",
++        ":ld",
++        ":ar",
++    ],
++)
++
++# AVR C++ toolchains with configs for supported CPUs
++
++# ATMega 2560
++atmega2560_cc_toolchain_config(name = "atmega2560_toolchain_config")
++
++cc_toolchain(
++    name = "atmega2560_toolchain",
++    toolchain_identifier = "atmega2560_toolchain",
++    toolchain_config = ":atmega2560_toolchain_config",
++    all_files = ":all_files",
++    compiler_files = ":avr_toolchain_compiler_files",
++    dwp_files = ":empty",
++    linker_files = ":avr_toolchain_linker_files",
++    objcopy_files = ":objcopy",
++    strip_files = ":strip",
++    ar_files = ":ar",
++    as_files = ":as",
++    supports_param_files = 0,
++)
++
++toolchain(
++    name = "cc_toolchain_for_atmega2560_linux_x86_64",
++    toolchain = ":atmega2560_toolchain",
++    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
++    exec_compatible_with = [
++        "@platforms//cpu:x86_64",
++        "@platforms//os:linux",
++    ],
++    target_compatible_with = [
++        "@avr_platforms//cpu:atmega2560",
++        "@platforms//os:none",
++    ],
++)
++
++# ATMega 328p
++atmega328p_cc_toolchain_config(name = "atmega328p_toolchain_config")
++
++cc_toolchain(
++    name = "atmega328p_toolchain",
++    toolchain_identifier = "atmega328p_toolchain",
++    toolchain_config = ":atmega328p_toolchain_config",
++    all_files = ":all_files",
++    compiler_files = ":avr_toolchain_compiler_files",
++    dwp_files = ":empty",
++    linker_files = ":avr_toolchain_linker_files",
++    objcopy_files = ":objcopy",
++    strip_files = ":strip",
++    ar_files = ":ar",
++    as_files = ":as",
++    supports_param_files = 0,
++)
++
++toolchain(
++    name = "cc_toolchain_for_atmega328p_linux_x86_64",
++    toolchain = ":atmega328p_toolchain",
++    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
++    exec_compatible_with = [
++        "@platforms//cpu:x86_64",
++        "@platforms//os:linux",
++    ],
++    target_compatible_with = [
++        "@avr_platforms//cpu:atmega328p",
++        "@platforms//os:none",
++    ],
++)
++
++# Compiler and system header targets.
++cc_library(
++    name = "system_headers",
++    hdrs = glob(["avr/include/**/*.h"]),
++    strip_include_prefix = "avr/include",
++)
++
++cc_library(
++    name = "compiler_headers",
++    hdrs = glob(["avr/lib/gcc/avr/13.2.0/include/**/*.h"]),
++    strip_include_prefix = "avr/lib/gcc/avr/13.2.0/include",
++)
