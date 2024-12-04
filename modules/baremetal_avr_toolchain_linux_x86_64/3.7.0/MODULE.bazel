@@ -8,4 +8,5 @@ bazel_dep(name = "avr_platforms", version = "1.0")
 
 register_toolchains(
     "//:cc_toolchain_for_atmega2560_linux_x86_64",
+    "//:cc_toolchain_for_atmega328p_linux_x86_64",
 )

@@ -1,6 +1,6 @@
 --- /dev/null
 +++ MODULE.bazel
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,12 @@
 +module(
 +    name = "baremetal_avr_toolchain_linux_x86_64",
 +    version = "3.7.0",
@@ -11,4 +11,5 @@
 +
 +register_toolchains(
 +    "//:cc_toolchain_for_atmega2560_linux_x86_64",
++    "//:cc_toolchain_for_atmega328p_linux_x86_64",
 +)
