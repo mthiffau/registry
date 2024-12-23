@@ -1,0 +1,16 @@
+--- /dev/null
++++ BUILD.bazel
+@@ -0,0 +1,13 @@
++package(default_visibility = ["//visibility:public"])
++
++# Can't use avr_cc_library or it will create a circular dependency.
++cc_library(
++    name = "avr-libstdcpp",
++    hdrs = glob(["include/**/*"]),
++    srcs = glob(["src/*"]),
++    strip_include_prefix = "include",
++    deps = [
++        "@baremetal_avr_toolchain_linux_x86_64//:system_headers",
++        "@baremetal_avr_toolchain_linux_x86_64//:compiler_headers",
++    ]
++)

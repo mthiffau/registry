@@ -1,5 +1,5 @@
 {
-    "homepage": "https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers",
+    "homepage": "https://github.com/modm-io/avr-libstdcpp",
     "maintainers": [
 	{
 	    "email": "matt.thiffault@gmail.com",
@@ -7,8 +7,7 @@
 	}
     ],
     "versions": [
-        "3.7.0",
-	"13.2.0"
+        "0.1"
     ],
     "yanked_versions": {}
 }
