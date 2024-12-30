@@ -84,7 +84,7 @@ AVR_COMMON_FEATURES = [
                             #"-MDD",
                             "-flto",
                             "-fno-fat-lto-objects",
-                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
+                        ],
                     ),
                 ])
             ),
@@ -111,7 +111,7 @@ AVR_COMMON_FEATURES = [
                             "-Wno-error=narrowing",
                             #"-MDD",
                             "-flto",
-                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
+                        ],
                     ),
                 ])
             ),
@@ -131,7 +131,7 @@ AVR_COMMON_FEATURES = [
                             "-x assembler-with-cpp",
                             "-flto",
                             #"-MDD",
-                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
+                        ],
                     ),
                 ])
             ),

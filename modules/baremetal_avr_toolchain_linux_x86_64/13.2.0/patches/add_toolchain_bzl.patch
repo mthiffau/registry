@@ -87,7 +87,7 @@
 +                            #"-MDD",
 +                            "-flto",
 +                            "-fno-fat-lto-objects",
-+                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                        ],
 +                    ),
 +                ])
 +            ),
@@ -114,7 +114,7 @@
 +                            "-Wno-error=narrowing",
 +                            #"-MDD",
 +                            "-flto",
-+                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                        ],
 +                    ),
 +                ])
 +            ),
@@ -134,7 +134,7 @@
 +                            "-x assembler-with-cpp",
 +                            "-flto",
 +                            #"-MDD",
-+                        ] + _isystemify(AVR_SYSTEM_INCLUDES),
++                        ],
 +                    ),
 +                ])
 +            ),
