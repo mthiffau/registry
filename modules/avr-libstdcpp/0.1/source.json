@@ -5,6 +5,9 @@
     "patch_strip": 0,
     "patches": {
        "add_build_file.patch": "sha256-4maUL+ioCFRmHZZIFyz40wGfST1205ONtjUo0ha6EtY=",
-       "add_module_dot_bazel.patch": "sha256-M8W8mZAsJ7a0FHjy6AHh2wPI0g4fHIrpkB0PUFS8/0c="
+       "add_module_dot_bazel.patch": "sha256-M8W8mZAsJ7a0FHjy6AHh2wPI0g4fHIrpkB0PUFS8/0c=",
+       "cmath.patch": "sha256-rBJDVh5jpJMYxIsicJqOyLLQEHjpFFbvYCzyp83AIpA=",
+       "cstdlib.patch": "sha256-p7wmmXh1GkqhwpXD5GEoIq/qDexWG37mw3jzE94eZ0I=",
+       "std_abs.h.patch": "sha256-9a1P3CvZrvo8jw3fQRJWskzoVldWi885MjxYrIVWu2E="
     }
 }

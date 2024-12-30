@@ -1,0 +1,17 @@
+--- include/bits/std_abs.h
++++ include/bits/std_abs.h
+@@ -34,12 +34,8 @@
+ 
+ #include <bits/c++config.h>
+ 
+-#define _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+-#include_next <stdlib.h>
+-#ifdef __CORRECT_ISO_CPP_MATH_H_PROTO
+-# include_next <math.h>
+-#endif
+-#undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
++#include <stdlib.h>
++#include <math.h>
+ 
+ #undef abs
+ 

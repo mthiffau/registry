@@ -10,6 +10,10 @@ diff --label "/dev/null" --label "MODULE.bazel" -u /dev/null module_dot_bazel > 
 BUILD_SHA=`cat add_build_file.patch | openssl dgst -sha256 -binary | openssl base64 -A`
 MODULE_SHA=`cat add_module_dot_bazel.patch | openssl dgst -sha256 -binary | openssl base64 -A`
 
+CMATH_SHA=`cat cmath.patch | openssl dgst -sha256 -binary | openssl base64 -A`
+CSTDLIB_SHA=`cat cstdlib.patch | openssl dgst -sha256 -binary | openssl base64 -A`
+STD_ABS_SHA=`cat std_abs.h.patch | openssl dgst -sha256 -binary | openssl base64 -A`
+
 # Re-write source.json using the new patch hashes.
 read -r -d '' SOURCE_JSON_START <<EOF
 {
@@ -22,7 +26,10 @@ EOF
 
 echo "$SOURCE_JSON_START" > ../source.json
 echo "       \"add_build_file.patch\": \"sha256-$BUILD_SHA\"," >> ../source.json
-echo "       \"add_module_dot_bazel.patch\": \"sha256-$MODULE_SHA\"" >> ../source.json
+echo "       \"add_module_dot_bazel.patch\": \"sha256-$MODULE_SHA\"," >> ../source.json
+echo "       \"cmath.patch\": \"sha256-$CMATH_SHA\"," >> ../source.json
+echo "       \"cstdlib.patch\": \"sha256-$CSTDLIB_SHA\"," >> ../source.json
+echo "       \"std_abs.h.patch\": \"sha256-$STD_ABS_SHA\"" >> ../source.json
 echo "    }" >> ../source.json
 echo "}" >> ../source.json
 

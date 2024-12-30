@@ -1,0 +1,15 @@
+--- include/cmath
++++ include/cmath
+@@ -41,9 +41,9 @@
+ #include <bits/c++config.h>
+ #include <bits/cpp_type_traits.h>
+ #include <ext/type_traits.h>
+-#define _GLIBCXX_INCLUDE_NEXT_C_HEADERS
+-#include_next <math.h>
+-#undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
++
++#include <math.h>
++
+ #include <bits/std_abs.h>
+ 
+ #ifndef _GLIBCXX_CMATH
