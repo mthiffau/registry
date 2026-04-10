@@ -1,8 +1,8 @@
 {
     "type": "git_repository",
     "remote": "https://github.com/mthiffau/linux_utils.git",
-    "commit": "69cf4742b803e0d204497d5486c73955d59be9a3",
+    "commit": "5c4538cd6b54c428dfd55406a76241eedae6ff96",
     "patches": {
-        "module_dot_bazel.patch": "sha256-9JQnta0M1JeifXtvmA7nbb80LJuNYDNRse9WKBoL6uQ="
+        "module_dot_bazel.patch": "sha256-5QxXZq14X89RqMP6+LiDkG4qvrkKEov4OkAP45uHWNA="
     }
 }
