@@ -1,0 +1,8 @@
+{
+    "url": "https://github.com/google/emboss/releases/download/v2026.0212.185041/emboss.zip",
+    "integrity": "sha256-82jZYKrDIh6jTDicKuoZ95kiPSkWssJ3893NfPnu7II=",
+    "patch_strip": 0,
+    "patches": {
+        "module_dot_bazel.patch": "sha256-83pMHANKs5WFJMG4lVAJ0E7C4NY6X9rbEjt+/9osmwc="
+    }
+}

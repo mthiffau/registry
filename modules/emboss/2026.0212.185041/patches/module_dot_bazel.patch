@@ -1,0 +1,10 @@
+--- MODULE.bazel.orig	2026-03-16 18:15:48.109926200 -0400
++++ MODULE.bazel	2026-03-16 18:22:11.721776000 -0400
+@@ -1,6 +1,6 @@
+ module(
+     name = "emboss",
+-    version = "0.0.0",
++    version = "2026.0212.185041",
+     repo_name = "com_google_emboss",
+ )
+ 
