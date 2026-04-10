@@ -3,5 +3,6 @@ module(
     version = "0.0.1",
 )
 
-bazel_dep(name = "rules_cc", version = "0.2.17")
 bazel_dep(name = "abseil-cpp", version = "20260107.1")
+bazel_dep(name = "linux_utils", version = "0.0.1")
+bazel_dep(name = "rules_cc", version = "0.2.17")
