@@ -1,0 +1,16 @@
+{
+    "homepage": "https://github.com/mthiffau/service_module",
+    "maintainers": [
+        {
+            "email": "matt.thiffault@gmail.com",
+            "name": "Matt Thiffault"
+        }
+    ],
+    "repository": [
+        "github:mthiffau/service_module"
+    ],
+    "versions": [
+        "0.0.1",
+    ],
+    "yanked_versions": {}
+}

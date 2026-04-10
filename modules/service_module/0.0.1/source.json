@@ -1,0 +1,8 @@
+{
+    "type": "git_repository",
+    "remote": "https://github.com/mthiffau/service_module.git",
+    "commit": "8bf0e07c33e266a87385d5727c90521ee4b4d7c6",
+    "patches": {
+        "module_dot_bazel.patch": "sha256-e4y52TQUMT//MNkCU/hT0Y/rVxGJxM3QlxJS/8gJQdU="
+    }
+}
