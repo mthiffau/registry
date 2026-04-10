@@ -1,0 +1,16 @@
+{
+    "homepage": "https://github.com/mthiffau/linux_utils",
+    "maintainers": [
+        {
+            "email": "matt.thiffault@gmail.com",
+            "name": "Matt Thiffault"
+        }
+    ],
+    "repository": [
+        "github:mthiffau/linux_utils"
+    ],
+    "versions": [
+        "0.0.1",
+    ],
+    "yanked_versions": {}
+}

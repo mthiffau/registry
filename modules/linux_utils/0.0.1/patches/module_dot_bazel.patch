@@ -1,0 +1,10 @@
+--- MODULE.bazel.orig	2026-04-10 15:46:20.567560900 -0400
++++ MODULE.bazel	2026-04-10 16:00:58.382158400 -0400
+@@ -1,6 +1,6 @@
+ module(
+     name = "linux_utils",
+-    version = "0.0.0",
++    version = "0.0.1",
+ )
+ 
+ bazel_dep(name = "rules_cc", version = "0.2.17")
